@@ -21,7 +21,7 @@ constexpr uint32_t KEY_SIZE = 100;
 constexpr uint32_t REPORT = 100000;
 
 int is_master = 0;
-const char* ip_master = "10.10.10.119"; //get_local_ip("eth0").c_str();
+const char* ip_master = "10.10.1.1"; //get_local_ip("eth0").c_str();
 const char* ip_worker = "localhost"; // get_local_ip("eth0").c_str();
 int port_master = 9991;
 int port_worker = 9992;
@@ -32,10 +32,10 @@ int val_size = 32;
 int cache_th = 30;
 int client_id = 0;
 int iter = 40000;
-const char *ycsb_dir = "/data/caiqc/zipf";
+const char *ycsb_dir = "/mnt/proj/FAAST/gam/dht/data/ycsb";
 
 pthread_t *threads;
-pthread_mutex_t cnt_mutex = PTHREAD_MUTEX_INITIALIZER;    
+pthread_mutex_t cnt_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cv = PTHREAD_COND_INITIALIZER;
 int ccount = 0;
 
@@ -247,7 +247,7 @@ int main(int argc, char* argv[]) {
   conf.master_port = port_master;
   conf.worker_ip = ip_worker;
   conf.worker_port = port_worker;
-  conf.size = (1UL << 34); // 16GB
+  conf.size = (1UL << 32); // 4GB
   conf.cache_th = (double)cache_th/100;
 
   GAlloc* alloc = GAllocFactory::CreateAllocator(&conf);
