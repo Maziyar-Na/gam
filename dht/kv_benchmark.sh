@@ -44,19 +44,20 @@ run_client() {
                 cmd="ssh $node \"sudo $bench --is_master $is_master --ip_master $master --ip_worker $node --no_client $nc --get_ratio $ratio --no_thread $nt --client_id $cid >$log_file &\""
                 eval $cmd
             fi
+            ((cid++))
         fi
-        ((cid++))
         sleep 1
     done
 }
 
 
 clients=3
-ratios=(100 99 90 50 0)
+#ratios=(100 99 90 50 0)
+ratios=(100)
 mk_dat_dir
 for ((thread = 1; thread<=1; thread++)); do
     for ratio in "${ratios[@]}"; do
-        kill_all
+        #kill_all
         echo "run benchmark with $clients clients $thread threads and $ratio get_ratio "
         run_client $clients $thread $ratio
     done
